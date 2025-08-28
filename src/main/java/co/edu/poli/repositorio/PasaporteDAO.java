@@ -1,19 +1,28 @@
 package co.edu.poli.repositorio;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import co.edu.poli.model.Pasaporte;
 
 public class PasaporteDAO implements CRUD<Pasaporte> {
 
-    // Conexión única del Singleton
     private final Connection conn;
 
     public PasaporteDAO() {
         this.conn = DatabaseConnection.getInstance().getConnection();
+    }
+
+    // Enum seguro para columnas permitidas en search
+    public enum PasaporteColumn {
+        NUMERO("numeroPasaporte"),
+        FECHA_EMISION("fechaEmision"),
+        FECHA_EXPIRACION("fechaExpiracion");
+
+        private final String col;
+        PasaporteColumn(String col) { this.col = col; }
+        public String getCol() { return col; }
     }
 
     @Override
@@ -42,9 +51,7 @@ public class PasaporteDAO implements CRUD<Pasaporte> {
                     rs.getInt("idPasaporte"),
                     rs.getString("numeroPasaporte"),
                     rs.getString("fechaEmision"),
-                    rs.getString("fechaExpiracion"),
-                    null,
-                    null
+                    rs.getString("fechaExpiracion")
                 );
             }
         } catch (SQLException e) {
@@ -78,5 +85,57 @@ public class PasaporteDAO implements CRUD<Pasaporte> {
         } catch (SQLException e) {
             System.out.println("❌ Error eliminando pasaporte: " + e.getMessage());
         }
+    }
+
+    @Override
+    public List<Pasaporte> search(String column, String criterio) {
+        List<Pasaporte> resultados = new ArrayList<>();
+        // Validar columna segura con enum
+        PasaporteColumn colEnum;
+        try {
+            colEnum = PasaporteColumn.valueOf(column.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            System.out.println("❌ Columna inválida para búsqueda");
+            return resultados;
+        }
+
+        String sql = "SELECT * FROM pasaporte WHERE " + colEnum.getCol() + " LIKE ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, "%" + criterio + "%");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Pasaporte p = new Pasaporte(
+                    rs.getInt("idPasaporte"),
+                    rs.getString("numeroPasaporte"),
+                    rs.getString("fechaEmision"),
+                    rs.getString("fechaExpiracion")
+                );
+                resultados.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println("❌ Error en búsqueda de pasaporte: " + e.getMessage());
+        }
+        return resultados;
+    }
+
+    // ✅ Método para traer todos los pasaportes
+    public List<Pasaporte> findAll() {
+        List<Pasaporte> resultados = new ArrayList<>();
+        String sql = "SELECT * FROM pasaporte";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Pasaporte p = new Pasaporte(
+                    rs.getInt("idPasaporte"),
+                    rs.getString("numeroPasaporte"),
+                    rs.getString("fechaEmision"),
+                    rs.getString("fechaExpiracion")
+                );
+                resultados.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println("❌ Error obteniendo todos los pasaportes: " + e.getMessage());
+        }
+        return resultados;
     }
 }
