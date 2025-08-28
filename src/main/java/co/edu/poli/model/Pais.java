@@ -1,51 +1,55 @@
 package co.edu.poli.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Pais {
 
-    public Pais() {
-    }
     private int idPais;
     private String nombrePais;
-    private List <Ciudad> Ciudad;
+    private List<Ciudad> ciudades;
 
+    // ====== 1️⃣ Constructor completo ======
+    public Pais(int idPais, String nombrePais, List<Ciudad> ciudades) {
+        this.idPais = idPais;
+        this.nombrePais = nombrePais;
+        this.ciudades = ciudades;
+    }
 
-    //CONSTRUCTOR
-	public Pais(int idPais, String nombrePais, List<co.edu.poli.model.Ciudad> ciudad) {
-		super();
-		this.idPais = idPais;
-		this.nombrePais = nombrePais;
-		Ciudad = ciudad;
-	}
+    // ====== 2️⃣ Constructor simplificado (solo nombre) ======
+    public Pais(String nombrePais) {
+        this.nombrePais = nombrePais;
+        this.ciudades = new ArrayList<>();
+    }
 
-	
-	//GETTERS AND SETTERS
+    // ====== 3️⃣ Getters y Setters ======
+    public int getIdPais() {
+        return idPais;
+    }
 
-	public int getIdPais() {
-		return idPais;
-	}
-	public void setIdPais(int idPais) {
-		this.idPais = idPais;
-	}
-	public String getNombrePais() {
-		return nombrePais;
-	}
-	public void setNombrePais(String nombrePais) {
-		this.nombrePais = nombrePais;
-	}
-	public List<Ciudad> getCiudad() {
-		return Ciudad;
-	}
-	public void setCiudad(List<Ciudad> ciudad) {
-		Ciudad = ciudad;
-	}
+    public void setIdPais(int idPais) {
+        this.idPais = idPais;
+    }
 
+    public String getNombrePais() {
+        return nombrePais;
+    }
 
-	//TO STRING
-	@Override
-	public String toString() {
-		return "Pais [idPais=" + idPais + ", nombrePais=" + nombrePais + ", Ciudad=" + Ciudad + "]";
-	}
-	
+    public void setNombrePais(String nombrePais) {
+        this.nombrePais = nombrePais;
+    }
+
+    public List<Ciudad> getCiudades() {
+        return ciudades;
+    }
+
+    public void setCiudades(List<Ciudad> ciudades) {
+        this.ciudades = ciudades;
+    }
+
+    // ====== 4️⃣ toString ======
+    @Override
+    public String toString() {
+        return "Pais [idPais=" + idPais + ", nombrePais=" + nombrePais + ", ciudades=" + ciudades + "]";
+    }
 }
