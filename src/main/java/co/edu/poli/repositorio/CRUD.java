@@ -1,4 +1,4 @@
-package co.edu.poli.controlador;
+package co.edu.poli.repositorio;
 
 public interface CRUD<T> {
 

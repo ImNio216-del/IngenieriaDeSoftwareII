@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import co.edu.poli.controlador.CRUD;
 import co.edu.poli.model.Pasaporte;
 
 public class PasaporteDAO implements CRUD<Pasaporte> {
