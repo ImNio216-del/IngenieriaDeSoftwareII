@@ -7,20 +7,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.controlador.ControladorFormulario">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.poli.edu.actividad.controlador.ControladorFormulario">
    <children>
       <TextField fx:id="txt9" layoutX="224.0" layoutY="200.0" promptText="NOMBRE PASAJERO" />
       <TextField fx:id="txt8" layoutX="32.0" layoutY="200.0" promptText="ID PASAJERO" />
       <TextField fx:id="txt1" layoutX="32.0" layoutY="52.0" promptText="ID PASAPORTE" />
       <TextField fx:id="txt4" layoutX="32.0" layoutY="88.0" promptText="FECHA EXPEDICION" />
-      <TextField fx:id="txt3" layoutX="411.0" layoutY="52.0" promptText="FECHA EMISION" />
-      <TextField fx:id="txt2" layoutX="223.0" layoutY="52.0" promptText="NUMERO DE PASAPORTE" />
+      <TextField fx:id="txt2" layoutX="223.0" layoutY="52.0" promptText="MOTIVO DE PASAPORTE" />
       <Button fx:id="btt1" layoutX="248.0" layoutY="483.0" mnemonicParsing="false" onAction="#click" prefHeight="53.0" prefWidth="105.0" text="CREAR" />
-      <TextField fx:id="txt10" layoutX="414.0" layoutY="200.0" promptText="ID PAIS NACIMIENTO" />
-      <TextField fx:id="txt11" layoutX="32.0" layoutY="235.0" promptText="PAIS" />
-      <TextField fx:id="txt12" layoutX="224.0" layoutY="235.0" promptText="CIUDAD" />
-      <TextField fx:id="txt14" layoutX="32.0" layoutY="275.0" promptText="¿TIENE VISA?" />
-      <TextField fx:id="txt13" layoutX="414.0" layoutY="235.0" promptText="FECHA NACIMIENTO" />
+      <TextField fx:id="txt13" layoutX="415.0" layoutY="200.0" promptText="FECHA NACIMIENTO" />
       <Label layoutX="176.0" layoutY="14.0" text="INFORMACION DE PASAPORTE">
          <font>
             <Font name="Gabriola" size="23.0" />
@@ -31,8 +26,6 @@
             <Font name="Gabriola" size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="txt6" layoutX="411.0" layoutY="88.0" promptText="PAIS" />
-      <TextField fx:id="txt7" layoutX="32.0" layoutY="128.0" promptText="CIUDAD" />
       <Label layoutX="221.0" layoutY="339.0" text="TIPO DE PASAPORTE">
          <font>
             <Font name="Gabriola" size="23.0" />
@@ -40,6 +33,6 @@
       </Label>
       <CheckBox fx:id="opc1" layoutX="113.0" layoutY="398.0" mnemonicParsing="false" text="PASAPORTE ORDINARIO" />
       <CheckBox fx:id="opc2" layoutX="338.0" layoutY="398.0" mnemonicParsing="false" text="PASAPORTE DIPLOMATICO" />
-      <TextField fx:id="txt5" layoutX="226.0" layoutY="88.0" promptText="ID PAIS" />
+      <TextField fx:id="txt5" layoutX="403.0" layoutY="52.0" promptText="ID PAIS" />
    </children>
 </AnchorPane>
