@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
@@ -51,11 +52,17 @@
     </build>
 
 =======
+=======
+>>>>>>> 0141011 (Composite y adapter)
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>co.edu.poli</groupId>
+<<<<<<< HEAD
     <artifactId>IngenieriaDeSoftware</artifactId>
+=======
+    <artifactId>ProyectoCorregido</artifactId>
+>>>>>>> 0141011 (Composite y adapter)
     <version>0.0.1-SNAPSHOT</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -94,12 +101,19 @@
                         <!-- Usage: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
+<<<<<<< HEAD
                             <mainClass>co.edu.poli.IngenieriaDeSoftware.App</mainClass>
+=======
+                            <mainClass>co.edu.poli.ProyectoCorregido.App</mainClass>
+>>>>>>> 0141011 (Composite y adapter)
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
+<<<<<<< HEAD
 >>>>>>> 3b06836 (Proyecto JavaFX de pasaportes - primera versión)
+=======
+>>>>>>> 0141011 (Composite y adapter)
 </project>

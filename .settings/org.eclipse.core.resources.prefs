@@ -1,7 +1,12 @@
 eclipse.preferences.version=1
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
 >>>>>>> 3b06836 (Proyecto JavaFX de pasaportes - primera versión)
+=======
+encoding//src/main/java=UTF-8
+encoding//src/main/resources=UTF-8
+>>>>>>> 0141011 (Composite y adapter)
 encoding/<project>=UTF-8

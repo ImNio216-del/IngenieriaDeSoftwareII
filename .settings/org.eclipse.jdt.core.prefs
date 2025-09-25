@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 <<<<<<< HEAD
+<<<<<<< HEAD
 org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
 org.eclipse.jdt.core.compiler.codegen.targetPlatform=17
 org.eclipse.jdt.core.compiler.codegen.unusedLocal=preserve
@@ -14,6 +15,8 @@ org.eclipse.jdt.core.compiler.problem.reportPreviewFeatures=warning
 org.eclipse.jdt.core.compiler.release=enabled
 org.eclipse.jdt.core.compiler.source=17
 =======
+=======
+>>>>>>> 0141011 (Composite y adapter)
 org.eclipse.jdt.core.compiler.codegen.targetPlatform=11
 org.eclipse.jdt.core.compiler.compliance=11
 org.eclipse.jdt.core.compiler.problem.enablePreviewFeatures=disabled
@@ -21,4 +24,7 @@ org.eclipse.jdt.core.compiler.problem.forbiddenReference=warning
 org.eclipse.jdt.core.compiler.problem.reportPreviewFeatures=ignore
 org.eclipse.jdt.core.compiler.release=enabled
 org.eclipse.jdt.core.compiler.source=11
+<<<<<<< HEAD
 >>>>>>> 3b06836 (Proyecto JavaFX de pasaportes - primera versión)
+=======
+>>>>>>> 0141011 (Composite y adapter)
