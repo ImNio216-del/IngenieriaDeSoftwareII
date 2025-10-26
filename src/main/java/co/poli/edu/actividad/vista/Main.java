@@ -1,11 +1,16 @@
 package co.poli.edu.actividad.vista;
 
+import java.util.Scanner;
+
 import co.poli.edu.actividad.modelo.*;
 import co.poli.edu.actividad.servicios.*;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("=== PATRÓN BRIDGE ===");
+    	
+    	Scanner scan = new Scanner(System.in);
+    	
+      /*  System.out.println("=== PATRÓN BRIDGE ===");
 
         // Pais (puedes pasar null para la lista de ciudades)
         Pais paisUSA = new Pais("US", "Estados Unidos", null);
@@ -37,5 +42,49 @@ public class Main {
         // Luego decorar con Seguro
         DecoratorSeguro titularConVisaYSeguro = new DecoratorSeguro(titularConVisa, "Seguro Internacional");
         System.out.println("Titular con visa y seguro -> " + titularConVisaYSeguro.mostrarInfo());
+        
+        */
+        System.out.println("✿ -------------------- ✿ ----------------------- ✿/");
+        
+        System.out.println("Main Flyweight");
+        
+        PasaporteTipo tipoP1 = FactoriaFlyWeight.getPasaporteTipo("Ordinario", "Azul Oscuro", "Español", "República de Colombia");
+        tipoP1.mostrarPasaporteCompleto(101, "OA123456", "2023-01-15", "2033-01-14");
+
+
+        PasaporteTipo tipoP2 = FactoriaFlyWeight.getPasaporteTipo("Ordinario", "Azul Oscuro", "Español", "República de Colombia");
+        tipoP2.mostrarPasaporteCompleto(102, "OA789012", "2024-03-20", "2034-03-19");
+
+
+        PasaporteTipo tipoP3 = FactoriaFlyWeight.getPasaporteTipo("Diplomático", "Negro", "Español e Inglés", "República de Colombia");
+        tipoP3.mostrarPasaporteCompleto(201, "PD987654", "2022-11-01", "2032-10-31");
+        
+
+        PasaporteTipo tipoP4 = FactoriaFlyWeight.getPasaporteTipo("Ordinario", "Verde", "Español", "Estados Unidos Mexicanos");
+        tipoP4.mostrarPasaporteCompleto(301, "MX456789", "2024-05-10", "2034-05-09");
+        
+
+        
+        System.out.println("✿ -------------------- ✿ ----------------------- ✿");
+        System.out.println("---------Main Facade----------");
+        FacadePasaporte fachada = new FacadePasaporte();
+        fachada.procesar("1001", "Ana Pérez", "Colombia");
+        fachada.procesar("2003", "Luis Gómez", "Chile");
+        fachada.procesar("1349", "Juan Pérez", "Colombia");
+        fachada.procesar("12345", "Ana Pérez", "Colombia");
+        fachada.procesar("12349", "Ana Pérez", "Colombia");
+
+        
+        System.out.println("✿ -------------------- ✿ ----------------------- ✿");
+        System.out.println("=== DEMO PROXY PASAPORTE ===");
+        ProxyPasaporte proxy = new ProxyAdaptadorPasaporte();
+      
+        System.out.println("=== DEMO PROXY PASAPORTE ===");
+        System.out.print("Ingrese su rol (Administrador, Funcionario o Visitante): ");
+        String rol = scan.nextLine();
+
+        proxy.visualizarInformacion(rol);
+
+        scan.close();
     }
 }
