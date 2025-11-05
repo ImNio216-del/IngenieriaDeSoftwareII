@@ -43,7 +43,7 @@ public class Main {
         DecoratorSeguro titularConVisaYSeguro = new DecoratorSeguro(titularConVisa, "Seguro Internacional");
         System.out.println("Titular con visa y seguro -> " + titularConVisaYSeguro.mostrarInfo());
         
-        */
+        
         System.out.println("✿ -------------------- ✿ ----------------------- ✿/");
         
         System.out.println("Main Flyweight");
@@ -86,5 +86,16 @@ public class Main {
         proxy.visualizarInformacion(rol);
 
         scan.close();
+        */
+    	
+    	
+    	System.out.println("✿ -------------------- ✿ ----------------------- ✿");
+        ObserverPublisher publisher = new ObserverPublisher();
+
+        System.out.println("Lista de observadores:");
+        System.out.println(publisher.verLista());
+
+        System.out.println("\nNotificaciones:");
+        System.out.println(publisher.notificarSuscribers());
     }
 }
