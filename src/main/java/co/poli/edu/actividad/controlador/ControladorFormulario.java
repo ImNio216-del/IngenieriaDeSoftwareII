@@ -58,7 +58,7 @@ public class ControladorFormulario {
         pasaportesActivos.put(idPasaporte, nuevoPasaporte);
         caretaker.agregarMemento(idPasaporte, nuevoPasaporte.guardarEstado());
 
-        // 🔹 Se elimina la notificación aquí (antes estaba publisher.notificarSuscribers()) 
+        
         showAlert("Éxito", "Pasaporte creado exitosamente.");
     }
 
