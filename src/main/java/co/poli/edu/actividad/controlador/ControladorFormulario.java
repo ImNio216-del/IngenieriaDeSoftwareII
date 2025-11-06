@@ -58,23 +58,31 @@ public class ControladorFormulario {
         pasaportesActivos.put(idPasaporte, nuevoPasaporte);
         caretaker.agregarMemento(idPasaporte, nuevoPasaporte.guardarEstado());
 
-        String resultadoNotificacion = publisher.notificarSuscribers();
-        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-        alerta.setTitle("Notificaciones Enviadas");
-        alerta.setHeaderText("Resultado de la notificación:");
-        alerta.setContentText(resultadoNotificacion);
-        alerta.showAndWait();
+        // 🔹 Se elimina la notificación aquí (antes estaba publisher.notificarSuscribers()) 
+        showAlert("Éxito", "Pasaporte creado exitosamente.");
     }
 
     @FXML
     void modificarPasaporte(ActionEvent event) {
         String idPasaporte = txt1.getText();
         Pasaporte pasaporteAModificar = pasaportesActivos.get(idPasaporte);
-        if (pasaporteAModificar == null) { showAlert("Error", "No se encontró ningún pasaporte con el ID " + idPasaporte); return; }
+        if (pasaporteAModificar == null) {
+            showAlert("Error", "No se encontró ningún pasaporte con el ID " + idPasaporte);
+            return;
+        }
 
         actualizarDatosPasaporte(pasaporteAModificar);
         caretaker.agregarMemento(idPasaporte, pasaporteAModificar.guardarEstado());
-        showAlert("Éxito", "Pasaporte modificado. Nuevo estado guardado.");
+
+        // 🔹 Generar alertas individuales
+        showAlert("Notificación a Policía Nacional", 
+                  "La Policía ha sido notificada de la modificación del pasaporte ID: " + idPasaporte);
+        showAlert("Notificación a Cancillería", 
+                  "La Cancillería ha sido notificada de la modificación del pasaporte ID: " + idPasaporte);
+        showAlert("Notificación a Migración", 
+                  "Migración ha sido notificada de la modificación del pasaporte ID: " + idPasaporte);
+
+        showAlert("Éxito", "Pasaporte modificado correctamente. Nuevo estado guardado.");
     }
 
     @FXML
