@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="450.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.poli.edu.actividad.controlador.ControladorCOR">
+   <children>
+      <VBox alignment="CENTER" layoutX="35.0" layoutY="25.0" prefHeight="400.0" prefWidth="480.0" spacing="15.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="25.0">
+         <children>
+            <Label text="CHAIN OF RESPONSABILITY BY JIMMY GUEVARA">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label text="ID Pasaporte 2 letras mayus y 6 numeros (ejemplo: AB123456)" />
+            <TextField fx:id="txtIdPasaporte" promptText="ID del Pasaporte" />
+            <Label text="Nombre del Pasajero" />
+            <TextField fx:id="txtNombrePasajero" promptText="Nombre completo" />
+            <Label text="Tipo de Pasaporte" />
+            <TextField fx:id="txtTipoPasaporte" promptText="Ordinario, Diplomático, etc." />
+            <Button fx:id="btnValidar" mnemonicParsing="false" onAction="#validarPasaporte" prefHeight="40.0" prefWidth="150.0" text="Validar Pasaporte" />
+            <Label text="Resultado de la Validación:">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="areaResultado" editable="false" prefHeight="100.0" wrapText="true" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>
