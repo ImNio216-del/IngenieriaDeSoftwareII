@@ -8,7 +8,7 @@ import co.poli.edu.actividad.servicios.*;
 public class Main {
     public static void main(String[] args) {
     	
-    	Scanner scan = new Scanner(System.in);
+    	Scanner sc = new Scanner(System.in);
     	
       /*  System.out.println("=== PATRÓN BRIDGE ===");
 
@@ -86,7 +86,7 @@ public class Main {
         proxy.visualizarInformacion(rol);
 
         scan.close();
-        */
+        
     	
     	
     	System.out.println("✿ -------------------- ✿ ----------------------- ✿");
@@ -97,5 +97,9 @@ public class Main {
 
         System.out.println("\nNotificaciones:");
         System.out.println(publisher.notificarSuscribers());
+        
+        */
+
+
     }
 }

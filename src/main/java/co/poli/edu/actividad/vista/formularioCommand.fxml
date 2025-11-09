@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="792.0" prefWidth="788.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.poli.edu.actividad.controlador.ControladorCommand">
+   <children>
+      <Text layoutX="280.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PASAPORTE" textAlignment="CENTER" wrappingWidth="257.13671875">
+         <font>
+            <Font name="Baskerville Old Face" size="40.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtTipo" layoutX="65.0" layoutY="161.0" prefHeight="45.0" prefWidth="329.0" promptText="Tipo">
+         <font>
+            <Font name="Bookman Old Style" size="24.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtColor" layoutX="422.0" layoutY="161.0" prefHeight="45.0" prefWidth="329.0" promptText="Color">
+         <font>
+            <Font name="Bookman Old Style" size="24.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtIdioma" layoutX="65.0" layoutY="219.0" prefHeight="45.0" prefWidth="329.0" promptText="Idioma">
+         <font>
+            <Font name="Bookman Old Style" size="24.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtEmisor" layoutX="422.0" layoutY="219.0" prefHeight="45.0" prefWidth="329.0" promptText="Emisor">
+         <font>
+            <Font name="Bookman Old Style" size="24.0" />
+         </font>
+      </TextField>
+      <Button fx:id="BttGuardar" layoutX="105.0" layoutY="317.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="125.0" text="Guardar">
+         <font>
+            <Font name="Cambria Math" size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="BttEliminar" layoutX="269.0" layoutY="317.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="125.0" text="Eliminar">
+         <font>
+            <Font name="Cambria Math" size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="BttEditar" layoutX="422.0" layoutY="317.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="125.0" text="Editar">
+         <font>
+            <Font name="Cambria Math" size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="BttLimpiar" layoutX="574.0" layoutY="317.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="125.0" text="Limpiar">
+         <font>
+            <Font name="Cambria Math" size="24.0" />
+         </font>
+      </Button>
+      <TableView fx:id="TablaVista" layoutX="47.0" layoutY="465.0" prefHeight="283.0" prefWidth="694.0">
+        <columns>
+          <TableColumn fx:id="ColumnaTipo" prefWidth="188.0" text="Tipo" />
+          <TableColumn fx:id="ColumnaColor" prefWidth="168.0" text="Color" />
+            <TableColumn fx:id="ColumnaIdioma" prefWidth="158.0" text="Idioma" />
+            <TableColumn fx:id="ColumnaEmisor" prefWidth="179.0" text="Emisor" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

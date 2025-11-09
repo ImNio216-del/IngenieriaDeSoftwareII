@@ -15,10 +15,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-    	// Carga la ventana principal de tu aplicación
-    	// AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("/co/poli/edu/actividad/vista/formulario.fxml"));
+    	//AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("/co/poli/edu/actividad/vista/formulario.fxml"));
     	//AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("/co/poli/edu/actividad/vista/formulariogeografico.fxml"));
-    	AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("/co/poli/edu/actividad/vista/formularioCOR.fxml"));
+    	//AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("/co/poli/edu/actividad/vista/formularioCOR.fxml"));
+    	AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("/co/poli/edu/actividad/vista/formularioCommand.fxml"));
     	scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Welcome");
