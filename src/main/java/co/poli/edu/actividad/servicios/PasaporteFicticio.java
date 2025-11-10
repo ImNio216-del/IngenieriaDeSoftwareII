@@ -7,6 +7,8 @@ public class PasaporteFicticio {
     private final String idioma;
     private final String emisor;
 
+   
+    
     public PasaporteFicticio(String tipo, String colorCubierta, String idioma, String emisor) {
         this.tipo = tipo;
         this.colorCubierta = colorCubierta;
@@ -14,8 +16,6 @@ public class PasaporteFicticio {
         this.emisor = emisor;
     }
 
-    
-    
     public String getTipo() {
 		return tipo;
 	}
@@ -29,8 +29,6 @@ public class PasaporteFicticio {
 		return emisor;
 	}
 
-
-
 	public void mostrarPasaporteCompleto(int idPasaporte, String numeroPasaporte, String fechaEmision, String fechaExpiracion) {
         System.out.println("--- Pasaporte Detallado ---");
         System.out.println("Tipo: " + this.tipo);
@@ -42,4 +40,5 @@ public class PasaporteFicticio {
         System.out.println("Idioma: " + this.idioma);
         System.out.println("Emisor: " + this.emisor);
     }
+
 }

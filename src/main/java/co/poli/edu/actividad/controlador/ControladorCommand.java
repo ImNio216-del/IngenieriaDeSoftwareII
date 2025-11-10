@@ -49,6 +49,17 @@ public class ControladorCommand {
     private TextField txtTipo;
     
     
+    
+    
+    //----PATRON STRATEGY
+    
+    @FXML
+    private Button BttValidar;   //BOTÓN
+   
+    //----PATRON STRATEGY
+    
+    
+    
     //---------------------------------------------------------COMMAND----------------------------------------------------------------------------------//
 
     // Lista de datos simulada (repositorio temporal)
@@ -74,7 +85,15 @@ public class ControladorCommand {
         BttEditar.setOnAction(e -> editarPasaporte());
         BttEliminar.setOnAction(e -> eliminarPasaporte());
         BttLimpiar.setOnAction(e -> limpiarCampos());
+        
+        
+        
+        //----PATRON STRATEGY
+        BttValidar.setOnAction(e -> validarPasaporte());   // ASIGNACIÓN
+        //----PATRON STRATEGY
 
+        
+        
         // Cargar datos seleccionados en los campos al hacer clic en una fila
         TablaVista.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) {
@@ -84,6 +103,8 @@ public class ControladorCommand {
                 txtEmisor.setText(newSel.getEmisor());
             }
         });
+        
+        
     }
 
     private void guardarPasaporte() {
@@ -170,6 +191,32 @@ public class ControladorCommand {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
+   
+    
+    
+    
+    //----PATRON STRATEGY
+    @FXML
+    private void validarPasaporte(){
+        PasaporteFicticio seleccionado=TablaVista.getSelectionModel().getSelectedItem();
+        if(seleccionado==null){
+            mostrarAlerta("Debe seleccionar un pasaporte para validar.");
+            return;
+        }
+        
+        // Creacion StrategyContext
+        StrategyContext context=new StrategyContext();
+        
+        // Ejecucion 3 validaciones y sus resultados
+        String resultado=context.validarTodo(seleccionado);
+        
+        // Mostrar resultados
+        Alert alert=new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Resultado de la validación");
+        alert.setContentText(resultado);
+        alert.showAndWait();
+    }
+    
     
     
     //-----------------------------------------------------------------------------------------------------------------------------------------------//
