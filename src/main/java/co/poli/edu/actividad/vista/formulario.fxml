@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -9,55 +10,125 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="917.0" prefWidth="1134.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.poli.edu.actividad.controlador.ControladorFormulario">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" 
+            prefHeight="917.0" prefWidth="1650.0" 
+            xmlns="http://javafx.com/javafx/24.0.1" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="co.poli.edu.actividad.controlador.ControladorFormulario">
+
    <children>
+
+      <!-- ================== CAMPOS DE PASAPORTE ================== -->
       <TextField fx:id="txt9" layoutX="224.0" layoutY="200.0" promptText="NOMBRE PASAJERO" />
       <TextField fx:id="txt8" layoutX="32.0" layoutY="200.0" promptText="ID PASAJERO" />
       <TextField fx:id="txt1" layoutX="32.0" layoutY="52.0" promptText="ID PASAPORTE" />
       <TextField fx:id="txt4" layoutX="32.0" layoutY="88.0" promptText="FECHA EXPEDICION" />
       <TextField fx:id="txt3" layoutX="411.0" layoutY="52.0" promptText="FECHA EMISION" />
       <TextField fx:id="txt2" layoutX="223.0" layoutY="52.0" promptText="NUMERO DE PASAPORTE" />
-      <Button fx:id="btt1" layoutX="823.0" layoutY="174.0" mnemonicParsing="false" onAction="#click" prefHeight="53.0" prefWidth="105.0" text="CREAR" />
+
+      <!-- ================== BOTONES DE PASAPORTE ================== -->
+      <Button fx:id="btt1" layoutX="734.0" layoutY="174.0" mnemonicParsing="false" 
+              onAction="#click" prefHeight="53.0" prefWidth="105.0" text="CREAR" />
+      <Button fx:id="bttDeshacer" layoutX="862.0" layoutY="174.0" mnemonicParsing="false" 
+              onAction="#deshacerCambio" prefHeight="53.0" prefWidth="105.0" text="DESHACER" />
+
+      <!-- ================== CAMPOS ADICIONALES ================== -->
       <TextField fx:id="txt10" layoutX="414.0" layoutY="200.0" promptText="ID PAIS NACIMIENTO" />
       <TextField fx:id="txt11" layoutX="32.0" layoutY="235.0" promptText="PAIS" />
       <TextField fx:id="txt12" layoutX="224.0" layoutY="235.0" promptText="CIUDAD" />
       <TextField fx:id="txt14" layoutX="32.0" layoutY="275.0" promptText="¿TIENE VISA?" />
       <TextField fx:id="txt13" layoutX="414.0" layoutY="235.0" promptText="FECHA NACIMIENTO" />
+
+      <!-- ================== ETIQUETAS ================== -->
       <Label layoutX="176.0" layoutY="14.0" text="INFORMACION DE PASAPORTE">
-         <font>
-            <Font name="Gabriola" size="23.0" />
-         </font>
+         <font><Font name="Gabriola" size="23.0" /></font>
       </Label>
+
       <Label layoutX="181.0" layoutY="153.0" text="INFORMACION DE TITULAR">
-         <font>
-            <Font name="Gabriola" size="23.0" />
-         </font>
+         <font><Font name="Gabriola" size="23.0" /></font>
       </Label>
+
       <TextField fx:id="txt6" layoutX="411.0" layoutY="88.0" promptText="PAIS" />
       <TextField fx:id="txt7" layoutX="32.0" layoutY="128.0" promptText="CIUDAD" />
+
       <Label layoutX="801.0" layoutY="20.0" text="TIPO DE PASAPORTE">
-         <font>
-            <Font name="Gabriola" size="23.0" />
-         </font>
+         <font><Font name="Gabriola" size="23.0" /></font>
       </Label>
+
       <CheckBox fx:id="opc1" layoutX="657.0" layoutY="80.0" mnemonicParsing="false" text="PASAPORTE ORDINARIO" />
       <CheckBox fx:id="opc2" layoutX="928.0" layoutY="80.0" mnemonicParsing="false" text="PASAPORTE DIPLOMATICO" />
+
       <TextField fx:id="txt5" layoutX="226.0" layoutY="88.0" promptText="ID PAIS" />
+
+      <!-- ================== TABLA DE HISTORIAL ================== -->
       <TableView fx:id="table" layoutX="104.0" layoutY="399.0" prefHeight="404.0" prefWidth="909.0">
-        <columns>
-          <TableColumn fx:id="column1" prefWidth="133.0" text="ID PASAPORTE" />
-          <TableColumn fx:id="column2" prefWidth="161.0" text="NUMERO PASAPORTE" />
+         <columns>
+            <TableColumn fx:id="column1" prefWidth="133.0" text="ID PASAPORTE" />
+            <TableColumn fx:id="column2" prefWidth="161.0" text="NUMERO PASAPORTE" />
             <TableColumn fx:id="column3" minWidth="2.0" prefWidth="130.0" text="FECHA EMISION" />
             <TableColumn fx:id="column4" prefWidth="187.0" text="NOMBRE PASAJERO" />
-            <TableColumn fx:id="colum5" prefWidth="136.0" text="PAIS DE VIAJE" />
+            <TableColumn fx:id="column5" prefWidth="136.0" text="PAIS DE VIAJE" />
             <TableColumn fx:id="column6" prefWidth="161.0" text="TIPO DE PASAPORTE" />
-        </columns>
+         </columns>
       </TableView>
+
       <Label layoutX="448.0" layoutY="350.0" text="HISTORIAL DE PASAPORTES">
-         <font>
-            <Font name="Gabriola" size="23.0" />
-         </font>
+         <font><Font name="Gabriola" size="23.0" /></font>
       </Label>
-      <Button fx:id="btt2" layoutX="508.0" layoutY="822.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="118.0" text="GENERAR" />
+
+      <!-- ================== BOTONES INFERIORES ================== -->
+      <Button fx:id="bttGenerarHistorial" layoutX="423.0" layoutY="822.0" mnemonicParsing="false" 
+              onAction="#generarHistorial" prefHeight="29.0" prefWidth="118.0" text="GENERAR" />
+      <Button fx:id="bttModificar" layoutX="574.0" layoutY="822.0" mnemonicParsing="false" 
+              onAction="#modificarPasaporte" prefHeight="29.0" prefWidth="118.0" text="MODIFICAR" />
+
+      <!-- ================== STATE ================== -->
+      <Label layoutX="1310.0" layoutY="18.0" text="STATE DE PAISES">
+         <font><Font name="Gabriola" size="23.0" /></font>
+      </Label>
+
+      <TextField fx:id="txtIdPaisState" layoutX="1296.0" layoutY="76.0" onAction="#cargarPais" promptText="ID DEL PAIS" />
+      <ComboBox fx:id="comboTransiciones" layoutX="1295.0" layoutY="119.0" prefWidth="150.0" promptText="ESTADOS" />
+      <Button fx:id="bttCambiarEstado" layoutX="1311.0" layoutY="163.0" mnemonicParsing="false" 
+              onAction="#cambiarEstado" text="CAMBIAR ESTADO" />
+
+      <!-- ================== MEDIATOR ================== -->
+      <Label layoutX="1344.0" layoutY="300.0" text="POLICIA">
+         <font><Font name="Gabriola" size="23.0" /></font>
+      </Label>
+
+      <Label layoutX="1330.0" layoutY="443.0" text="MIGRACION">
+         <font><Font name="Gabriola" size="23.0" /></font>
+      </Label>
+
+      <Label layoutX="1322.0" layoutY="580.0" text="CANCILLERIA">
+         <font><Font name="Gabriola" size="23.0" /></font>
+      </Label>
+
+      <TextField fx:id="txtDesdePolicia" layoutX="1269.0" layoutY="337.0" prefHeight="26.0" prefWidth="215.0" 
+                 promptText="TEXTO DESDE POLICIA">
+         <font><Font name="Comic Sans MS" size="12.0" /></font>
+      </TextField>
+
+      <TextField fx:id="txtDesdeMigracion" layoutX="1270.0" layoutY="478.0" prefHeight="26.0" prefWidth="215.0" 
+                 promptText="TEXTO DESDE MIGRACION">
+         <font><Font name="Comic Sans MS" size="12.0" /></font>
+      </TextField>
+
+      <TextField fx:id="txtDesdeCancilleria" layoutX="1277.0" layoutY="615.0" prefHeight="26.0" prefWidth="215.0" 
+                 promptText="TEXTO DESDE CANCILLERIA">
+         <font><Font name="Comic Sans MS" size="12.0" /></font>
+      </TextField>
+
+      <!-- ===== Botones del Mediator conectados correctamente ===== -->
+      <Button fx:id="BotonEnviarDesdePolicia" layoutX="1351.0" layoutY="379.0" mnemonicParsing="false" 
+              onAction="#enviarDesdePolicia" text="Enviar" />
+
+      <Button fx:id="BotonEnviarDesdeMigracion" layoutX="1350.0" layoutY="516.0" mnemonicParsing="false" 
+              onAction="#enviarDesdeMigracion" text="Enviar" />
+
+      <Button fx:id="BotonEnviarDesdeCancilleria" layoutX="1352.0" layoutY="650.0" mnemonicParsing="false" 
+              onAction="#enviarDesdeCancilleria" text="Enviar" />
+
    </children>
 </AnchorPane>

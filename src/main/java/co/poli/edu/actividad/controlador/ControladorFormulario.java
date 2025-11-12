@@ -3,12 +3,9 @@ package co.poli.edu.actividad.controlador;
 import co.poli.edu.actividad.modelo.Pais;
 import co.poli.edu.actividad.modelo.Pasaporte;
 import co.poli.edu.actividad.modelo.PasaporteOrdinario;
-import co.poli.edu.actividad.servicios.MementoCaretaker;
-import co.poli.edu.actividad.servicios.MementoPasaporte;
-import co.poli.edu.actividad.servicios.ObserverPublisher;
-// ¡IMPORTS AÑADIDOS!
-import co.poli.edu.actividad.servicios.ESTPaisContext;
-import co.poli.edu.actividad.servicios.ESTEstadoPais;
+import co.poli.edu.actividad.servicios.*;
+
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -22,24 +19,39 @@ import java.util.Map;
 
 public class ControladorFormulario {
 
-    // --- Componentes FXML (Sección Memento y Observer) ---
+    // --- Componentes FXML (Memento y Observer) ---
     @FXML private Button btt1, bttModificar, bttGenerarHistorial, bttDeshacer;
     @FXML private CheckBox opc1, opc2;
     @FXML private TextField txt1, txt2, txt3, txt6, txt9;
     @FXML private TableView<MementoPasaporte> table;
     @FXML private TableColumn<MementoPasaporte, String> column1, column2, column3, column4, column5, column6;
 
-    // --- Componentes FXML (Sección State) ---
+    // --- Componentes FXML (State) ---
     @FXML private TextField txtIdPaisState;
     @FXML private ComboBox<String> comboTransiciones;
     @FXML private Button bttCambiarEstado;
 
-    // --- Lógica de Patrones ---
+    // --- Lógica de patrones ---
     private MementoCaretaker caretaker;
     private Map<String, Pasaporte> pasaportesActivos;
     private ObserverPublisher publisher;
     private Map<String, ESTPaisContext> paisesContext;
 
+    // --- Componentes Mediator ---
+    @FXML private Button BotonEnviarDesdeCancilleria;
+    @FXML private Button BotonEnviarDesdeMigracion;
+    @FXML private Button BotonEnviarDesdePolicia;
+    @FXML private TextField txtDesdeCancilleria;
+    @FXML private TextField txtDesdeMigracion;
+    @FXML private TextField txtDesdePolicia;
+
+    // --- Instancias del patrón Mediator ---
+    private MediatorConcrete mediatorCentral;
+    private MediatorCancilleria cancilleria;
+    private MediatorMigracion migracion;
+    private MediatorPolicia policia;
+
+    //___________________________________________________________________________________________________________________________
     @FXML
     public void initialize() {
         caretaker = new MementoCaretaker();
@@ -47,16 +59,26 @@ public class ControladorFormulario {
         publisher = new ObserverPublisher();
         paisesContext = new HashMap<>();
 
+        // --- Configurar columnas ---
         column1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIdPasaporte()));
         column2.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNumeroPasaporte()));
         column3.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFechaEmision()));
         column4.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombrePasajero()));
         column5.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPaisDeViaje()));
         column6.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTipoDePasaporte()));
+
+        // --- Inicializar Mediator ---
+        mediatorCentral = new MediatorConcrete();
+        cancilleria = new MediatorCancilleria(mediatorCentral);
+        migracion = new MediatorMigracion(mediatorCentral);
+        policia = new MediatorPolicia(mediatorCentral);
+
+        mediatorCentral.registrarInstitucion(cancilleria);
+        mediatorCentral.registrarInstitucion(migracion);
+        mediatorCentral.registrarInstitucion(policia);
     }
 
-    // --- Métodos para Patrón State ---
-
+    // --- MÉTODOS PATRÓN STATE ---
     @FXML
     void cargarPais(ActionEvent event) {
         String id = txtIdPaisState.getText();
@@ -127,12 +149,18 @@ public class ControladorFormulario {
         }
     }
 
-    // --- Métodos para Memento y Observer (LÓGICA RESTAURADA) ---
+    // --- MÉTODOS MEMENTO Y OBSERVER ---
     @FXML
     void click(ActionEvent event) {
         String idPasaporte = txt1.getText();
-        if (idPasaporte.isEmpty()) { showAlert("Error", "El ID del pasaporte no puede estar vacío."); return; }
-        if (pasaportesActivos.containsKey(idPasaporte)) { showAlert("Error", "Ya existe un pasaporte con el ID " + idPasaporte); return; }
+        if (idPasaporte.isEmpty()) {
+            showAlert("Error", "El ID del pasaporte no puede estar vacío.");
+            return;
+        }
+        if (pasaportesActivos.containsKey(idPasaporte)) {
+            showAlert("Error", "Ya existe un pasaporte con el ID " + idPasaporte);
+            return;
+        }
 
         Pasaporte nuevoPasaporte = new PasaporteOrdinario();
         actualizarDatosPasaporte(nuevoPasaporte);
@@ -140,18 +168,17 @@ public class ControladorFormulario {
         caretaker.agregarMemento(idPasaporte, nuevoPasaporte.guardarEstado());
 
         String resultadoNotificacion = publisher.notificarSuscribers();
-        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-        alerta.setTitle("Notificaciones Enviadas");
-        alerta.setHeaderText("Resultado de la notificación:");
-        alerta.setContentText(resultadoNotificacion);
-        alerta.showAndWait();
+        showAlert("Notificaciones Enviadas", resultadoNotificacion);
     }
 
     @FXML
     void modificarPasaporte(ActionEvent event) {
         String idPasaporte = txt1.getText();
         Pasaporte pasaporteAModificar = pasaportesActivos.get(idPasaporte);
-        if (pasaporteAModificar == null) { showAlert("Error", "No se encontró ningún pasaporte con el ID " + idPasaporte); return; }
+        if (pasaporteAModificar == null) {
+            showAlert("Error", "No se encontró ningún pasaporte con el ID " + idPasaporte);
+            return;
+        }
 
         actualizarDatosPasaporte(pasaporteAModificar);
         caretaker.agregarMemento(idPasaporte, pasaporteAModificar.guardarEstado());
@@ -162,7 +189,10 @@ public class ControladorFormulario {
     void deshacerCambio(ActionEvent event) {
         String idPasaporte = txt1.getText();
         Pasaporte pasaporteARevertir = pasaportesActivos.get(idPasaporte);
-        if (pasaporteARevertir == null) { showAlert("Error", "No se encontró ningún pasaporte con el ID " + idPasaporte); return; }
+        if (pasaporteARevertir == null) {
+            showAlert("Error", "No se encontró ningún pasaporte con el ID " + idPasaporte);
+            return;
+        }
 
         MementoPasaporte mementoAnterior = caretaker.deshacer(idPasaporte);
         if (mementoAnterior == null) {
@@ -178,7 +208,11 @@ public class ControladorFormulario {
     @FXML
     void generarHistorial(ActionEvent event) {
         Map<String, List<MementoPasaporte>> historialCompleto = caretaker.getHistorialCompleto();
-        if (historialCompleto.isEmpty()) { showAlert("Información", "El historial está vacío."); table.getItems().clear(); return; }
+        if (historialCompleto.isEmpty()) {
+            showAlert("Información", "El historial está vacío.");
+            table.getItems().clear();
+            return;
+        }
 
         List<MementoPasaporte> todosLosMementos = new ArrayList<>();
         for (List<MementoPasaporte> mementos : historialCompleto.values()) {
@@ -187,6 +221,44 @@ public class ControladorFormulario {
         table.setItems(FXCollections.observableArrayList(todosLosMementos));
     }
 
+    // --- MÉTODOS MEDIATOR (totalmente independientes) ---
+    @FXML
+    void enviarDesdeCancilleria(ActionEvent event) {
+        String mensaje = txtDesdeCancilleria.getText();
+        if (mensaje.isEmpty()) {
+            showAlert("Error", "El mensaje desde Cancillería no puede estar vacío.");
+            return;
+        }
+
+        String respuesta = mediatorCentral.enviarMensaje(mensaje, cancilleria);
+        showAlert("Mensaje desde Cancillería", respuesta);
+    }
+
+    @FXML
+    void enviarDesdeMigracion(ActionEvent event) {
+        String mensaje = txtDesdeMigracion.getText();
+        if (mensaje.isEmpty()) {
+            showAlert("Error", "El mensaje desde Migración no puede estar vacío.");
+            return;
+        }
+
+        String respuesta = mediatorCentral.enviarMensaje(mensaje, migracion);
+        showAlert("Mensaje desde Migración", respuesta);
+    }
+
+    @FXML
+    void enviarDesdePolicia(ActionEvent event) {
+        String mensaje = txtDesdePolicia.getText();
+        if (mensaje.isEmpty()) {
+            showAlert("Error", "El mensaje desde Policía no puede estar vacío.");
+            return;
+        }
+
+        String respuesta = mediatorCentral.enviarMensaje(mensaje, policia);
+        showAlert("Mensaje desde Policía", respuesta);
+    }
+
+    // --- MÉTODOS AUXILIARES ---
     private void actualizarDatosPasaporte(Pasaporte pasaporte) {
         String tipoPasaporte = opc1.isSelected() ? "Ordinario" : opc2.isSelected() ? "Diplomático" : "No seleccionado";
         pasaporte.setId(txt1.getText());
@@ -196,18 +268,15 @@ public class ControladorFormulario {
         pasaporte.setPaisDeViaje(txt6.getText());
         pasaporte.setTipoDePasaporte(tipoPasaporte);
     }
-    
+
     private void actualizarFormularioConDatos(Pasaporte pasaporte) {
         txt1.setText(pasaporte.getId());
         txt2.setText(pasaporte.getNumeroPasaporte());
         txt3.setText(pasaporte.getFechaEmision());
         txt9.setText(pasaporte.getNombrePasajero());
         txt6.setText(pasaporte.getPaisDeViaje());
-        if (pasaporte.getTipoDePasaporte().equals("Ordinario")) {
-            opc1.setSelected(true); opc2.setSelected(false);
-        } else if (pasaporte.getTipoDePasaporte().equals("Diplomático")) {
-            opc1.setSelected(false); opc2.setSelected(true);
-        }
+        opc1.setSelected("Ordinario".equals(pasaporte.getTipoDePasaporte()));
+        opc2.setSelected("Diplomático".equals(pasaporte.getTipoDePasaporte()));
     }
 
     private void showAlert(String title, String message) {
